@@ -1,7 +1,6 @@
 export const About = () => {
   return (
-    <section className="relative bg-black text-center text-white overflow-hidden">
-      {/* Estrellas decorativas */}
+    <section className="relative bg-black text-center mt-65 text-white overflow-hidden">
       <img
         src="/imgs/diseño/estrellagris.png"
         alt="Decoración estrella izquierda"
@@ -13,9 +12,7 @@ export const About = () => {
         className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1/3 opacity-20 pointer-events-none"
       />
 
-      {/* Contenido principal */}
       <div className="text-gray-600 relative z-10 flex flex-col items-center justify-center px-4 py-14">
-        {/* Títulos superiores */}
         <h1 className="text-3xl md:text-5xl font-bold tracking-wide uppercase">
           Estudio Serigráfico
         </h1>
@@ -23,7 +20,6 @@ export const About = () => {
           Procesos hechos a mano en Argentina Buenos Aires
         </p>
 
-        {/* Imagen central */}
         <div className="py-6 w-full max-w-3xl px-2">
           <img
             src="/imgs/diseño/about.webp"
@@ -33,9 +29,7 @@ export const About = () => {
         </div>
       </div>
 
-      {/* Imagen inferior con título */}
       <div className="relative z-10 w-full px-4 mb-4">
-        {/* Título sobre la imagen */}
         <h2 className="text-xl md:text-2xl font-semibold uppercase text-white mb-2">
           Collabs
         </h2>
@@ -46,7 +40,6 @@ export const About = () => {
         />
       </div>
 
-      {/* Sección inferior con imagen central y columnas de texto */}
       <div className="relative z-10 w-full bg-black py-6 px-4">
         {/* Título */}
         <h3 className="text-base sm:text-lg md:text-xl font-bold uppercase text-center mb-8 tracking-wide text-gray-600 leading-relaxed">

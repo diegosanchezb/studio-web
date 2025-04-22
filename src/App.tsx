@@ -6,11 +6,16 @@ import { Main } from "./components/Main";
 import { Navbar } from "./components/Navbar";
 import { About } from "./components/About";
 import { ProductSection } from "./components/ProductSection";
+import { Cart } from "./components/ui/Cart";
+import { useState } from "react";
 
 function App() {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar isVisible={isCartOpen} setIsVisible={setIsCartOpen} />
+      <Cart isVisible={isCartOpen} setIsVisible={setIsCartOpen} />
       <Routes>
         <Route
           path="/"

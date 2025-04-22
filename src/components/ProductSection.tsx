@@ -7,14 +7,16 @@ export const ProductSection = () => {
   const [selectedTalle, setSelectedTalle] = useState("");
 
   const filteredProducts = products.filter((product) => {
-    const matchPrenda = selectedPrenda ? product.prenda === selectedPrenda : true;
+    const matchPrenda = selectedPrenda
+      ? product.prenda === selectedPrenda
+      : true;
     const matchTalle = selectedTalle ? product.talle === selectedTalle : true;
     return matchPrenda && matchTalle;
   });
 
   return (
     <div
-      className="flex flex-col md:flex-row w-full bg-black/12 mx-auto px-4 sm:px-6 lg:px-8 mt-28"
+      className="flex flex-col md:flex-row w-full bg-black/12 mx-auto px-4 sm:px-6 lg:px-8 mt-65"
       style={{
         backgroundImage: "url('/imgs/diseño/estrellas.png')",
         backgroundSize: "cover",
@@ -24,7 +26,7 @@ export const ProductSection = () => {
     >
       {/* FILTROS */}
       <aside className="w-full md:w-72 mt-6 md:mt-14 border-b md:border-b-0 md:border-r border-gray-300 pb-4 md:pr-4 md:pl-20 flex flex-col items-center md:items-start text-center md:text-left">
-      <h3 className="text-2xl font-bold text-gray-800 mb-2">FILTROS</h3>
+        <h3 className="text-2xl font-bold text-gray-800 mb-2">FILTROS</h3>
 
         <div className="mb-3">
           <p className="text-lg font-semibold text-gray-800 mb-2">PRENDA</p>
@@ -85,12 +87,13 @@ export const ProductSection = () => {
 
       {/* PRODUCTOS */}
       <section className="flex-1 flex flex-col items-center w-full mt-6 md:mt-1 mb-12">
-        <h2 className="text-3xl font-bold text-gray-800 mt-10">PRODUCTOS</h2>
+        <h2 className="text-3xl font-bold text-gray-800 mt-10">TODOS LOS PRODUCTOS</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full px-4">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
+                id={product.id}
                 image={product.image}
                 stock={product.stock}
                 price={product.price}

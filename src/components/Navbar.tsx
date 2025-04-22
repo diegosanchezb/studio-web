@@ -7,16 +7,23 @@ import {
 import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Cart } from "./ui/Cart";
+import { useCartStore } from "./stores/cartStore";
 
-export const Navbar = () => {
+interface NavbarProps {
+  isVisible: boolean;
+  setIsVisible: (visible: boolean) => void;
+}
+
+export const Navbar = ({ isVisible, setIsVisible }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { items } = useCartStore();
 
   return (
-    <nav className="w-full mt-8 top-10 z-50">
+    <nav className="fixed top-0 left-0 w-full z-[100] bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Parte superior: logos y redes */}
         <div className="flex flex-col md:flex-row items-center justify-between h-auto relative gap-6">
-          {/* Logo izquierdo */}
+          {/* logo izquierdo */}
           <div className="md:absolute md:left-10 lg:left-40">
             <img
               src="/imgs/icons/logo.png"
@@ -25,7 +32,7 @@ export const Navbar = () => {
             />
           </div>
 
-          {/* Logo central */}
+          {/* logo central */}
           <div className="flex justify-center w-full">
             <img
               src="/imgs/icons/logo2.webp"
@@ -34,7 +41,7 @@ export const Navbar = () => {
             />
           </div>
 
-          {/* Redes y carrito */}
+          {/* redes sociales y carrito */}
           <div className="flex items-center justify-center gap-4 md:absolute md:right-10">
             <a
               href="https://www.instagram.com/studio.peroxido/"
@@ -58,12 +65,19 @@ export const Navbar = () => {
             >
               <AiOutlineMail />
             </a>
-            <a
-              href="#cart"
-              className="text-gray-700 hover:text-lime-500 text-3xl"
+
+            {/* Icono del carrito con contador */}
+            <button
+              onClick={() => setIsVisible(!isVisible)}
+              className="relative text-3xl cursor-pointer"
             >
-              <AiOutlineShoppingCart />
-            </a>
+              <AiOutlineShoppingCart className="text-gray-700 hover:text-lime-500" />
+              {items.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-sm rounded-full w-5 h-5 flex items-center justify-center">
+                  {items.length}
+                </span>
+              )}
+            </button>
 
             {/* Botón hamburguesa en mobile */}
             <button
@@ -75,55 +89,53 @@ export const Navbar = () => {
           </div>
         </div>
 
-        {/* Menú de navegación */}
-        <div className={`flex-col items-center mt-4 ${isOpen ? "flex" : "hidden"} sm:flex`}>
-          <ul className="flex flex-col sm:flex-row sm:space-x-12 text-xl font-semibold gap-4 sm:gap-0">
+        {/* menú de navegación */}
+        <div
+          className={`flex-col items-center mt-4 ${
+            isOpen ? "flex" : "hidden"
+          } sm:flex`}
+        >
+          <ul className="flex flex-col sm:flex-row sm:space-x-12 text-xl mb-5 font-semibold gap-4 sm:gap-0">
             <li>
-              <Link to="/" className="text-gray-700 hover:text-lime-500" onClick={() => setIsOpen(false)}>
+              <Link
+                to="/"
+                className="text-gray-700 hover:text-lime-500"
+                onClick={() => setIsOpen(false)}
+              >
                 INICIO
               </Link>
             </li>
             <li>
-              <Link to="/products" className="text-gray-700 hover:text-lime-500" onClick={() => setIsOpen(false)}>
+              <Link
+                to="/products"
+                className="text-gray-700 hover:text-lime-500"
+                onClick={() => setIsOpen(false)}
+              >
                 PRODUCTOS
               </Link>
             </li>
             <li>
-              <Link to="/about" className="text-gray-700 hover:text-lime-500" onClick={() => setIsOpen(false)}>
+              <Link
+                to="/about"
+                className="text-gray-700 hover:text-lime-500"
+                onClick={() => setIsOpen(false)}
+              >
                 SOBRE NOSOTROS
               </Link>
             </li>
             <li>
-              <a href="#footer" className="text-gray-700 hover:text-lime-500" onClick={() => setIsOpen(false)}>
+              <a
+                href="#footer"
+                className="text-gray-700 hover:text-lime-500"
+                onClick={() => setIsOpen(false)}
+              >
                 CONTACTO
               </a>
             </li>
           </ul>
         </div>
 
-        {/* Galería de productos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-12 mb-12 px-4">
-          <img
-            src="/imgs/diseño/remenaranja.png"
-            alt="Remera naranja"
-            className="h-[250px] w-full object-cover"
-          />
-          <img
-            src="/imgs/diseño/remenegra.png"
-            alt="Remera negra"
-            className="h-[250px] w-full object-cover"
-          />
-          <img
-            src="/imgs/diseño/remeblanca.png"
-            alt="Remera blanca"
-            className="h-[250px] w-full object-cover"
-          />
-          <img
-            src="/imgs/diseño/remerosa.webp"
-            alt="Remera rosa"
-            className="h-[250px] w-full object-cover"
-          />
-        </div>
+        <Cart isVisible={isVisible} setIsVisible={setIsVisible} />
       </div>
     </nav>
   );
